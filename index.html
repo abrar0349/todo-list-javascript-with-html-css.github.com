@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+
+<style>
+div.main{
+/* display: block; */
+margin-left: 40%;
+}
+
+ul {
+list-style: none;
+padding-right: 30px;
+display: grid;
+grid-template-columns: auto 60px 60px;
+grid-row-gap: 10px;
+grid-column-gap: 5px;
+}
+
+
+
+</style>
+
+</head>
+<body>
+
+<div class="main">  
+
+<input type="text" id = "result">
+
+<ul id = "list-items">
+
+</ul>
+
+<button onclick= "todoList()">Create Todo List</button>
+<button onclick= "clr()">Clear</button>
+
+</div> 
+
+
+<script>
+
+let mainarr = []
+
+
+function todoList(){
+
+mainarr.push(document.getElementById("result").value);
+document.getElementById("result").value = "";
+MainFun();
+console.log("check it")
+
+}
+
+function MainFun(){
+
+
+
+document.getElementById("list-items").innerHTML = ""
+
+mainarr.map((elem,ind) => {
+    console.log(ind);
+
+
+
+let itemlist =  document.createElement("li")
+itemlist.innerHTML = elem
+document.getElementById("list-items").appendChild(itemlist)
+
+
+//Delete button functionality
+
+let Delbtn = document.createElement("button")
+Delbtn.innerHTML = "Delet"
+document.getElementById("list-items").appendChild(Delbtn)
+
+Delbtn.addEventListener('click',function(ind){
+// mainarr.splice(ind,1)
+DeletBtn(ind)
+})
+
+
+
+//Edit button functionality
+
+let Editbtn = document.createElement("button")
+Editbtn.innerHTML = "Edit"
+document.getElementById("list-items").appendChild(Editbtn)
+
+Editbtn.addEventListener('click',function(elem){
+EditBtn(elem,ind);
+})
+
+})
+
+}
+
+function DeletBtn(ind){
+mainarr.splice(ind,1)
+console.log(`Check it ${ind} working or not`)
+MainFun();
+}
+
+function EditBtn(elem,ind){
+x = document.getElementById('result').value;
+if(x == ""){
+x = elem
+}
+if(elem = "")
+mainarr[ind] = document.getElementById('result').value
+}
+
+function clr(){
+
+document.getElementById("list-items").innerHTML = ""
+document.getElementById("result").value = ""
+
+}
+
+
+
+</script>
+
+</body>
+</html>
